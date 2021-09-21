@@ -27,7 +27,7 @@ function addGoalHandler() {
      </View> 
      <View>
        {goals.map(function (goal) {
-         return <Text>{goal}</Text>;
+         return <Text key={goal}>{goal}</Text>;
        } )}
      </View>
       <StatusBar style="auto" />
