@@ -6,10 +6,10 @@ export default function App() {
 const [enteredGoal, setEnteredGoal] = useState('');
 const [goals, setGoals] = useState([]);
 
-function goalInputHandler(enteredText) {
+function goalInputHandle(enteredText) {
   setEnteredGoal(enteredText);
 }
-function addGoalHandler() {
+function addGoalHandle() {
   setGoals([...goals, enteredGoal]);
 }
 
@@ -19,15 +19,15 @@ function addGoalHandler() {
        <TextInput 
        placeholder="Enter Goal Here" 
        style={styles.input}
-       onChangeText={goalInputHandler}
+       onChangeText={goalInputHandle}
        value = {enteredGoal}
        />
        
-       <Button title="Add" onPress={addGoalHandler}/>
+       <Button title="Add" onPress={addGoalHandle}/>
      </View> 
      <View>
        {goals.map(function (goal) {
-         return <Text key={goal}>{goal}</Text>;
+         return <View style={styles.list} key={goal}><Text>{goal}</Text></View>;
        } )}
      </View>
       <StatusBar style="auto" />
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   
   screen: {
     padding: 50,
-    backgroundColor: 'grey',
+    backgroundColor: 'white',
   },
   inputContainer: {
     flexDirection: 'row', 
@@ -51,5 +51,12 @@ const styles = StyleSheet.create({
     borderBottomColor: 'blue', 
     borderBottomWidth: 1, 
     padding: 10
+  },
+  list: {
+    marginVertical: 8,
+    padding: 10,
+    backgroundColor: '#ccc',
+    borderWidth: 1,
+    borderColor: 'black'
   }
 });
