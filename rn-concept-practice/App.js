@@ -9,6 +9,7 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
+import GoalItem from "./Components/GoalItem";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -26,7 +27,7 @@ export default function App() {
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Enter Goal Here"
-          style={styles.input}
+          style={styles.inputField}
           onChangeText={goalInputHandle}
           value={enteredGoal}
         />
@@ -35,11 +36,7 @@ export default function App() {
       </View>
       <FlatList
         data={goals}
-        renderItem={(itemData) => (
-          <View style={styles.list}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
       />
       <StatusBar style="auto" />
     </View>
@@ -56,17 +53,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  input: {
+  inputField: {
     width: 200,
     borderBottomColor: "blue",
     borderBottomWidth: 1,
     padding: 10,
-  },
-  list: {
-    marginVertical: 8,
-    padding: 10,
-    backgroundColor: "#ccc",
-    borderWidth: 1,
-    borderColor: "black",
   },
 });
