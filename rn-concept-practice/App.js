@@ -13,19 +13,35 @@ import GoalInput from "./Components/GoalInput";
 import GoalItem from "./Components/GoalItem";
 
 export default function App() {
-  const [enteredGoal, setEnteredGoal] = useState("");
+  //const [enteredGoal, setEnteredGoal] = useState("");
   const [goals, setGoals] = useState([]);
 
-  function addGoalHandle(goalTitle) {
-    setGoals([...goals, { key: Math.random().toString(), value: goalTitle }]);
-  }
+  const addGoalHandle = (goalTitle) => {
+    setGoals((currentGoals) => [
+      ...goals,
+      { key: Math.random().toString(), value: goalTitle },
+    ]);
+  };
+
+  const removeGoalHandle = (goalKey) => {
+    console.log("handle working");
+    setGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.key !== goalKey);
+    });
+  };
 
   return (
     <View style={styles.screen}>
       <GoalInput onAddGoal={addGoalHandle} />
       <FlatList
         data={goals}
-        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
+        renderItem={(itemData) => (
+          <GoalItem
+            title={itemData.item.value}
+            key={itemData.item.key}
+            onDelete={removeGoalHandle.bind(this, itemData.item.key)}
+          />
+        )}
       />
       <StatusBar style="auto" />
     </View>
