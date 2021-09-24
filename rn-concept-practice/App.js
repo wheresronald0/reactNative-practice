@@ -15,7 +15,9 @@ import GoalItem from "./Components/GoalItem";
 export default function App() {
   //const [enteredGoal, setEnteredGoal] = useState("");
   const [goals, setGoals] = useState([]);
+  const [addMode, setAddMode] = useState(false);
 
+  //Handers- named functions
   const addGoalHandle = (goalTitle) => {
     setGoals((currentGoals) => [
       ...goals,
@@ -32,7 +34,8 @@ export default function App() {
 
   return (
     <View style={styles.screen}>
-      <GoalInput onAddGoal={addGoalHandle} />
+      <Button title="Add New Goal" onPress={() => setAddMode(true)} />
+      <GoalInput isVisible={addMode} onAddGoal={addGoalHandle} />
       <FlatList
         data={goals}
         renderItem={(itemData) => (

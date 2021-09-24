@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
 
 const GoalInput = (props) => {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -8,23 +8,25 @@ const GoalInput = (props) => {
     setEnteredGoal(enteredText);
   }
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        placeholder="Enter Goal Here"
-        style={styles.inputField}
-        onChangeText={goalInputHandle}
-        value={enteredGoal}
-      />
+    <Modal visible={props.isVisible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Enter Goal Here"
+          style={styles.inputField}
+          onChangeText={goalInputHandle}
+          value={enteredGoal}
+        />
 
-      <Button title="Add" onPress={props.onAddGoal.bind(this, enteredGoal)} />
-    </View>
+        <Button title="Add" onPress={props.onAddGoal.bind(this, enteredGoal)} />
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
   },
   inputField: {
