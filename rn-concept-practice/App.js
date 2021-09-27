@@ -23,6 +23,7 @@ export default function App() {
       ...goals,
       { key: Math.random().toString(), value: goalTitle },
     ]);
+    setAddMode(false);
   };
 
   const removeGoalHandle = (goalKey) => {
